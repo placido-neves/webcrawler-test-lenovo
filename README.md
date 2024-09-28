@@ -26,6 +26,7 @@ $ yarn install
 
 
 ## EndPoint 
+Metodo get
 
 ```bash
 http://localhost:8000/
