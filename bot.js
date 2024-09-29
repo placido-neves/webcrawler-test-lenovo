@@ -49,24 +49,14 @@ async function getNotebooks(){
             let codProd = linkProduct.split("/")
 
             let nameSplit = name.split(" ")
-            let descriptionSplit = description.split(',')
-    
-            
+                   
             if(nameSplit[0].toLowerCase() === 'lenovo' | nameSplit.includes("ThinkPad")){
-                if(descriptionSplit.includes(name) | descriptionSplit.includes("Asus VivoBook 15 X540NA-GQ008T Chocolate Black")){
-                    descriptionSplit.shift()                    
-                }
+                
                 productLenovo.push({
                     id:parseInt(codProd[codProd.length-1]),
                     name:name,
                     image:urlRoot+image,
-                    description:{
-                        screen:descriptionSplit[0].trimStart(),
-                        processor:descriptionSplit[1].trimStart(),
-                        RAM:descriptionSplit[2].trimStart(),
-                        HD:descriptionSplit[3].trimStart(),
-                        System:descriptionSplit[4].trimStart()
-                    },
+                    description:description,
                     price:parseFloat(price.replace('$','')),
                     review:review,
                     star:star,
