@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node 'index.js'"
+    "run": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -11,6 +12,10 @@
   "dependencies": {
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "validate-color": "^2.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

@@ -1,5 +1,7 @@
 const axios =  require('axios')
 const cheerio =  require('cheerio')
+var validateColor = require("validate-color").default;
+
 
 async function getSite(url){
     return await axios.get(url)
@@ -20,6 +22,30 @@ async function sortable(notebooks){
         return a.price - b.price
     })
     return notebookSortable
+}
+function descriptions(description){
+    let des = {}
+    for(d in description){
+        if(validateColor(description[0].trim())){
+            des.color = description[0].trim()
+            des.screen = description[1].trim()
+            des.processor = description[2].trim()
+            des.RAM = description[3].trim()
+            des.HD = description[4].trim()
+           
+        }else{
+            des.screen = description[0].trim()
+            des.processor = description[1].trim()
+            des.RAM = description[2].trim()
+            des.HD = description[3].trim()
+
+        }
+    }
+
+    return des
+   
+    
+
 }
 
 async function getNotebooks(){
@@ -48,28 +74,21 @@ async function getNotebooks(){
             
             let codProd = linkProduct.split("/")
 
-            let nameSplit = name.split(" ")
-            let descriptionSplit = description.split(',')
+            let nameSplit = name.split(" ")      
+            
     
             
             if(nameSplit[0].toLowerCase() === 'lenovo' | nameSplit.includes("ThinkPad")){
-                if(descriptionSplit.includes(name) | descriptionSplit.includes("Asus VivoBook 15 X540NA-GQ008T Chocolate Black")){
-                    descriptionSplit.shift()                    
-                }
+                               
+                
                 productLenovo.push({
                     id:parseInt(codProd[codProd.length-1]),
                     name:name,
                     image:urlRoot+image,
-                    description:{
-                        screen:descriptionSplit[0].trimStart(),
-                        processor:descriptionSplit[1].trimStart(),
-                        RAM:descriptionSplit[2].trimStart(),
-                        HD:descriptionSplit[3].trimStart(),
-                        System:descriptionSplit[4].trimStart()
-                    },
+                    description:description,
                     price:parseFloat(price.replace('$','')),
                     review:review,
-                    star:star,
+                    star:star, 
                     link:urlRoot+linkProduct  
                 })
             }
