@@ -57,7 +57,7 @@ async function getNotebooks(){
                     descriptionSplit.shift()                    
                 }
                 productLenovo.push({
-                    id:codProd[codProd.length-1],
+                    id:parseInt(codProd[codProd.length-1]),
                     name:name,
                     image:urlRoot+image,
                     description:{
